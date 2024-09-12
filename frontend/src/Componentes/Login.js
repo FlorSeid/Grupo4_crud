@@ -6,15 +6,19 @@ function Login() {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:8000/login?usuario=${usuario}&password=${password}`);
-            navigate('/inicio');
+            const response = await axios.post('http://localhost:8000/login', {
+                usuario: usuario,
+                password: password
+            });
+            if (response.data.message === 'Inicio de sesión exitoso') {
+                navigate('/inicio');
+            }
         } catch (error) {
-            //alert('Error fallo el inicio');
-            alert(error);
+            alert('Error: Falló el inicio de sesión. Verifica tus credenciales.');
         }
     };
 
@@ -28,4 +32,3 @@ function Login() {
 }
 
 export default Login;
-
