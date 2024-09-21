@@ -12,6 +12,10 @@ class RespuestaUsuario(BaseModel):
     email:str
     edad: int
 
+class LoginRequest(BaseModel):
+    usuario: str
+    password: str
+
 class Config: 
     orm_mode= True
 
